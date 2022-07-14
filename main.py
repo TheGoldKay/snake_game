@@ -50,6 +50,20 @@ class Snake:
       for i in range(len(self.b) - 1, 1):
         self.b[i] = self.b[i - 1]
       self.clock = time.time()
+    
+  def move(self, key):
+    if key == pygame.K_UP or key == pygame.K_w:
+      self.vy = -1
+      self.vx = 0
+    elif key == pygame.K_DOWN or key == pygame.K_s:
+      self.vy = 1
+      self.vx = 0
+    elif key == pygame.K_LEFT or key == pygame.K_a:
+      self.vx = -1
+      self.vy = 0 
+    elif key == pygame.K_RIGHT or key == pygame.K_d:
+      self.vx = 1
+      self.vy = 0
 
 
 def make_grid(box_size):
@@ -80,11 +94,14 @@ def main():
   running = True
   while running:
     dt = clock.tick(FPS)
-    print(dt)
     screen.fill(BG_COLOR)
     for event in pygame.event.get(): 
-      if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+      if event.type == pygame.QUIT:
         running = False
+      elif event.type == pygame.KEYDOWN: 
+        if event.key == pygame.K_ESCAPE:
+          running = False 
+        snake.move(event.key)
     snake.update()
     draw_grid(grid, screen)
     snake.draw(screen)
