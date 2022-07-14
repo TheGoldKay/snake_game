@@ -7,8 +7,9 @@ WIN_HEIGHT = 480
 BOX_SIZE = 20
 BG_COLOR = (20, 92, 68)
 shift = 10
-WHITE = (20+shift, 92+shift, 68+shift)
-SNAKE_COLOR = WHITE
+WHITE = (BG_COLOR[0]+shift, BG_COLOR[1]+shift, BG_COLOR[2]+shift)
+shift = 35
+SNAKE_COLOR = (BG_COLOR[0]+shift, BG_COLOR[1]+shift, BG_COLOR[2]+shift)
 
 class Box:
   def __init__(self, row, column, size, color = WHITE, width = 1):
