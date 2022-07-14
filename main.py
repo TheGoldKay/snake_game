@@ -6,18 +6,22 @@ WIN_WIDTH = 620
 WIN_HEIGHT = 480
 BOX_SIZE = 20
 BG_COLOR = (20, 92, 68)
-WHITE = (150, 150, 150)
+shift = 10
+WHITE = (20+shift, 92+shift, 68+shift)
 SNAKE_COLOR = WHITE
 
 class Box:
-  def __init__(self, row, column, size):
+  def __init__(self, row, column, size, color = WHITE, width = 1):
     self.r = row 
     self.c = column 
     self.s = size 
+    self.color = color 
+    self.width = width 
   
   def draw(self, surf):
     rect = pygame.Rect(self.c * self.s, self.r * self.s, self.s, self.s)
-    pygame.draw.rect(surf, WHITE, rect, 1)
+    pygame.draw.rect(surf, self.color, rect, self.width)
+
 
 class Snake:
   def __init__(self, head_row, head_col, size):
