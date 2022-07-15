@@ -41,7 +41,7 @@ class Food(Box):
 
 class Snake:
   def __init__(self, head_row, head_col):
-    self.b = [[head_row, head_col]]
+    self.b = [[head_row, head_col], [head_row, head_col+1], [head_row, head_col+2], [head_row, head_col+3]]
     self.s = BOX_SIZE 
     self.timer = 0.2
     self.clock = time.time()
@@ -60,18 +60,20 @@ class Snake:
   
   def update(self):
     if time.time() - self.clock > self.timer:
-      self.b[0][0] += self.vy 
-      self.b[0][1] += self.vx 
-      if self.b[0][0] > self.r:
-        self.b[0][0] = 0
-      elif self.b[0][0] < 0:
-        self.b[0][0] = self.r 
-      if self.b[0][1] > self.c:
-        self.b[0][1] = 0
-      elif self.b[0][1] < 0:
-        self.b[0][1] = self.c 
-      for i in range(len(self.b) - 1, 1):
-        self.b[i] = self.b[i - 1]
+      x = self.b[0][1]
+      y = self.b[0][0]
+      x += self.vx 
+      y += self.vy 
+      if y > self.r:
+        y = 0
+      elif y < 0:
+        y = self.r 
+      if x > self.c:
+        x = 0
+      elif x < 0:
+        x = self.c 
+      self.b.insert(0, [y, x])
+      self.b.pop()
       self.clock = time.time()
     
   def move(self, key):
